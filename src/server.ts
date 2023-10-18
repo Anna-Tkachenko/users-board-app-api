@@ -2,11 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import { UsersController } from './controllers/users.controller';
 import { ColorsController } from './controllers/colors.controllers';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const PORT = 5000;
 const app = express();
 
-const CLIENT_ORIGIN = 'http://localhost:3000';
+const CLIENT_ORIGIN = process.env.CLIENT_URL;
 
 app.use(cors({
   origin: CLIENT_ORIGIN,
