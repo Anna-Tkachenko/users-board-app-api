@@ -1,35 +1,18 @@
-import { User } from '../types';
-
-const users = [
-  { id: 1, name: 'Joe Biden', carColorId: 5 },
-  { id: 2, name: 'Elon Musk', carColorId: 4 },
-  { id: 3, name: 'Pan Roman', carColorId: 2 },
-];
-
-function getMaxId(elements: User[]): number {
-  const ids = elements.map(({ id }) => id);
-
-  return Math.max(...ids) + 1;
-}
+import {User, UserCreationAttributes} from "../models";
 
 const getAll = () => {
-  return users;
+  return User.findAll();
 }
 
-const create = ({ name, carColorId }: Omit<User, 'id'>) => {
-  const newUser = {
-    id: getMaxId(users),
+const create = ({ name, carColorId }: UserCreationAttributes) => {
+  return User.create({
     name,
     carColorId,
-  };
-
-  users.push(newUser);
-
-  return newUser;
+  });
 }
 
-const findById = (userId: number): User | undefined => {
-  return users.find(({ id }) => id === userId);
+const findById = (userId: number) => {
+  return User.findByPk(userId);
 }
 
 export const UserService = {

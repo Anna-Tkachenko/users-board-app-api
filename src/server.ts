@@ -6,6 +6,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+import { connect } from './utils/db-setup';
+
+connect();
+
 const PORT = 5000;
 const app = express();
 

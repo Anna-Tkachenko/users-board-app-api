@@ -2,13 +2,13 @@ import { ControllerAction } from '../types';
 import { UserService } from '../services/users.service';
 
 
-const getAll: ControllerAction = (req, res) => {
-  const users = UserService.getAll();
+const getAll: ControllerAction = async (req, res) => {
+  const users = await UserService.getAll();
 
   res.send(users);
 };
 
-const create: ControllerAction = (req, res) => {
+const create: ControllerAction = async (req, res) => {
   const { name, carColorId } = req.body;
 
   if (
@@ -20,7 +20,7 @@ const create: ControllerAction = (req, res) => {
     return;
   }
 
-  const newUser = UserService.create({
+  const newUser = await UserService.create({
     name,
     carColorId,
   });
@@ -29,10 +29,10 @@ const create: ControllerAction = (req, res) => {
   res.send(newUser);
 };
 
-const getById: ControllerAction = (req, res) => {
+const getById: ControllerAction = async (req, res) => {
   const { userId } = req.params;
 
-  const user = UserService.findById(+userId);
+  const user = await UserService.findById(+userId);
 
   if (!user) {
     res.sendStatus(404);
