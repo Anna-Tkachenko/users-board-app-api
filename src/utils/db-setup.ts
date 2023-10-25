@@ -6,7 +6,10 @@ const DB_URI = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@dpg
 const sequelize = new Sequelize(DB_URI, {
   models: [Color, User],
   dialectOptions: {
-    ssl: true,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
 });
 
