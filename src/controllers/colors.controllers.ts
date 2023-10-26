@@ -18,6 +18,7 @@ const getAll: ControllerAction = async (req, res) => {
     return;
   }
 
+  // some changes
   const colors = await Color.findAndCountAll({
     offset: +offset,
     limit: +limit,
